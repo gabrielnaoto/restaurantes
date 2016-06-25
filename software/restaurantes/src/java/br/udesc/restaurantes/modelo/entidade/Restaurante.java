@@ -1,6 +1,7 @@
 package br.udesc.restaurantes.modelo.entidade;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,14 +29,22 @@ public class Restaurante implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL, optional=false)
     @JoinColumn(name="categoria")
     private Categoria categoria;
+    
+    @Column(name="fotos")
+    private List<String> fotos;
 
     public Restaurante() {
     }
 
-    public Restaurante(String descricao, String nomeEstabelecimento, Categoria categoria) {
+    public Restaurante(String descricao, String nomeEstabelecimento, Categoria categoria, List<String> fotos) {
         this.descricao = descricao;
         this.nomeEstabelecimento = nomeEstabelecimento;
         this.categoria = categoria;
+        this.fotos = fotos;
+    }
+    
+    public void addFotos(String foto){
+        fotos.add(foto);
     }
 
     public String getDescricao() {
@@ -70,8 +79,17 @@ public class Restaurante implements Serializable {
         this.categoria = categoria;
     }
 
+    public List<String> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<String> fotos) {
+        this.fotos = fotos;
+    }
+
     @Override
     public String toString() {
-        return "Restaurante{" + "descricao=" + descricao + ", nomeEstabelecimento=" + nomeEstabelecimento + ", restauranteId=" + restauranteId + ", categoria=" + categoria + '}';
+        return "Restaurante{" + "descricao=" + descricao + ", nomeEstabelecimento=" + nomeEstabelecimento + ", restauranteId=" + restauranteId + ", categoria=" + categoria + ", fotos=" + fotos + '}';
     }
+    
 }

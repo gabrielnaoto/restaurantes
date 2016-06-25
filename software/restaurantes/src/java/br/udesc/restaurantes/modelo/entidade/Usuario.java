@@ -141,6 +141,15 @@ public class Usuario implements Serializable{
         this.usuarioId = usuarioId;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    
     @Override
     public String toString() {
         return "Usuario{" + "apelido=" + apelido + ", dataNascimento=" + dataNascimento + ", foto=" + foto + ", gostos=" + gostos + ", nacionalidade=" + nacionalidade + ", nome=" + nome + ", profissao=" + profissao + ", usuarioId=" + usuarioId + '}';

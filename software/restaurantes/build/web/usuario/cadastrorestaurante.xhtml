@@ -10,13 +10,32 @@
     <h:body>
         <ui:composition template="../template.xhtml">
             <ui:define name="titulo">
-                Cadastro de restaurantes
+                Cadastro de Restaurantes
             </ui:define>
             <ui:define name="conteudo">
-                <h:panelGrid columns="2">
-                    
-                    
+                <h:form>
+                <h:panelGrid columns="3">
+                    <p:outputLabel value="#{i18n.nome}"/>
+                    <p:inputText value="#{beanCadastroRestaurante.restaurante.nomeEstabelecimento}" id="in-nome"
+                                 required="true" requiredMessage="#{i18n.obrigatorio}"/>
+                    <p:message for="in-nome"/>
+
+                    <p:outputLabel value="#{i18n.categoria}"/>
+                    <p:selectManyMenu value="#{beanCadastroRestaurante.restaurante.categoria.nome}" id="in-categoria"
+                                 required="true" requiredMessage="#{i18n.obrigatorio}"/>
+                    <p:message for="in-categoria"/>
+
+                    <p:outputLabel value="#{i18n.descricaoRestaurante}"/>
+                    <p:inputTextarea value="#{beanCadastroRestaurante.restaurante.descricao}" id="in-descricao"
+                                     required="true" requiredMessage="#{i18n.obrigatorio}"/>
+                    <p:message for="in-descricao"/>
+
+                    <p:outputLabel value="#{i18n.foto}"/>
+                    <p:commandButton value="#{i18n.aqui}" action="#{beanCadastroRestaurante.restaurante.addFotos(foto)}" id="in-fotos"/>
+                    <p:outputLabel value=""/>
+                    <p:commandButton value="#{i18n.finalizar}" action="#{beanCadastroRestaurante.salvar}" ajax="false"/>
                 </h:panelGrid>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
