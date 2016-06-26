@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/ignoi/Documents/GitHub/restaurantes/software/restaurantes/src/java/br/udesc/restaurantes/bean/BeanPesquisa.java</file>
             <file>file:/C:/Users/ignoi/Documents/GitHub/restaurantes/software/restaurantes/web/resources/css/estilo.css</file>
-            <file>file:/C:/Users/ignoi/Documents/GitHub/restaurantes/software/restaurantes/src/java/br/udesc/restaurantes/modelo/entidade/Restaurante.java</file>
+            <file>file:/C:/Users/ignoi/Documents/GitHub/restaurantes/software/restaurantes/web/template.xhtml</file>
             <file>file:/C:/Users/ignoi/Documents/GitHub/restaurantes/software/restaurantes/src/java/br/udesc/restaurantes/bean/BeanConsultaRestaurante.java</file>
+            <file>file:/C:/Users/ignoi/Documents/GitHub/restaurantes/software/restaurantes/web/index.xhtml</file>
             <file>file:/C:/Users/ignoi/Documents/GitHub/restaurantes/software/restaurantes/web/consultarestaurante.xhtml</file>
         </group>
     </open-files>

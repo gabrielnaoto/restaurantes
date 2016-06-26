@@ -15,24 +15,28 @@
             </ui:define>
             <ui:define name="conteudo">
                 <div id="restaurante-info">
-                    <p:panel id="info" header="#{beanConsultaRestaurante.restaurante.nomeEstabelecimento}" style="margin-bottom:20px">
+                    <p:panel id="info" header="#{beanConsultaRestaurante.restaurante.nomeEstabelecimento}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante != null}">
                         <p:panelGrid columns="2" styleClass="foo">
-                            <p:galleria value="#{beanConsultaRestaurante.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                            <p:galleria value="#{beanConsultaRestaurante.images}" var="image" panelWidth="500" panelHeight="313" showCaption="false" >
                                 <p:graphicImage name="img/restaurantes/1/#{image}" alt="Image Description for #{image}" title="#{image}"/>
                             </p:galleria>
-                            <p:panel styleClass="foo2">
-                                <h:panelGrid columns="2">
+                            <p:panel styleClass="foo2" >
+                                <h:panelGrid columns="1">
                                     <p:outputLabel value="#{beanConsultaRestaurante.restaurante.descricao}"/>
-                                    <p:outputLabel value=""/>
-
-                                    <h:outputText value="Nota:" />
-                                    <p:rating value="#{beanConsultaRestaurante.restaurante.avaliacao}" readonly="true" />    
                                 </h:panelGrid>
+                                <f:facet name="footer">
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel value="Avaliação geral:"/>
+                                        <p:rating value="#{beanConsultaRestaurante.restaurante.avaliacao}" readonly="true" />     
+                                    </h:panelGrid>
+
+                                </f:facet>
                             </p:panel>
                         </p:panelGrid>
-                        <f:facet class="footer" name="footer">
+                    </p:panel>
+                    <p:panel id="info-not" header="#{i18n.semresultados}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante == null}">
 
-                        </f:facet>
+
                     </p:panel>
                 </div>
             </ui:define>
