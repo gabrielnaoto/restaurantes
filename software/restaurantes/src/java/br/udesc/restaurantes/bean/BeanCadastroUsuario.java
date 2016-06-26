@@ -41,8 +41,8 @@ public class BeanCadastroUsuario {
         if (dao.apelido(usuario.getApelido()) == null) {
             return salvar();
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Apelido ja cadastrado"));
-            return "index.jsf";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Apelido ja existe"));
+            return null;
         }
     }
 

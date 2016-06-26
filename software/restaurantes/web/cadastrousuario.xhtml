@@ -14,7 +14,7 @@
                 Cadastro de usuários
             </ui:define>
             <ui:define name="conteudo">
-                                 <p:growl id="growl" showDetail="true"/>  
+                <p:growl id="growl" showDetail="true"/>  
                 <h:form>
                     <h:panelGrid columns="3">
                         <p:outputLabel value="#{i18n.nome}"/>
@@ -27,13 +27,10 @@
                                      required="true" requiredMessage="#{i18n.obrigatorio}"/>
                         <p:message for="in-apelido"/>
 
-                        <p:outputLabel value="#{i18n.nascimento}"/>    
-                        <p:inputText value="#{beanCadastroUsuario.usuario.dataNascimento}" id="in-nascimento"
-                                     required="true" requiredMessage="#{i18n.obrigatorio}" converterMessage="#{i18n.formatoInvalido}">    
-                            <f:convertDateTime pattern="dd/MM/yyyy"/> 
-                        </p:inputText>
-                        <p:message for="in-nascimento"/>
-
+                        <p:outputLabel for="mask" value="#{i18n.nascimento}" />
+                        <p:calendar id="mask" value="#{beanCadastroUsuario.usuario.dataNascimento}" pattern="dd-MM-yyyy" mask="true" />
+                        <p:outputLabel value=""/>
+                        
                         <p:outputLabel value="#{i18n.profissao}"/>
                         <p:inputText value="#{beanCadastroUsuario.usuario.profissao}" id="in-profissao"
                                      required="true" requiredMessage="#{i18n.obrigatorio}"/>
@@ -49,7 +46,7 @@
                             <f:validateLength minimum="8"/>
                         </p:password>
                         <p:message for="in-senha"/>
-                  
+
                         <p:outputLabel value="#{i18n.foto}"/>
                         <p:commandButton value ="#{i18n.aqui}" action="#{beanCadastroUsuario.usuario.foto}" id="in-foto"/>
                         <p:outputLabel value=""/>

@@ -23,7 +23,7 @@ public class Usuario implements Serializable {
     private String apelido;
 
     @Column(name = "data_nascimento")
-    private String dataNascimento;
+    private Date dataNascimento;
 
     @Column(name = "foto")
     private String foto;
@@ -52,7 +52,7 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String apelido, String dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, int usuarioId) {
+    public Usuario(String apelido, Date dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, int usuarioId) {
         this.apelido = apelido;
         this.dataNascimento = dataNascimento;
         this.foto = foto;
@@ -63,7 +63,7 @@ public class Usuario implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public Usuario(String apelido, String dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, int usuarioId, String senha) {
+    public Usuario(String apelido, Date dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, int usuarioId, String senha) {
         this.apelido = apelido;
         this.dataNascimento = dataNascimento;
         this.foto = foto;
@@ -87,17 +87,12 @@ public class Usuario implements Serializable {
         this.apelido = apelido;
     }
 
-    public String getDataNascimento() {
-        if (dataNascimento != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            return sdf.format(new Date(dataNascimento));
-        } else {
-            return "";
-        }
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setDataNascimento(String dateNascimento) {
-        this.dataNascimento = dateNascimento;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getFoto() {
