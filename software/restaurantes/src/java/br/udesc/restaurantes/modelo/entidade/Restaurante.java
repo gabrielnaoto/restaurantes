@@ -12,26 +12,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="restaurantes")
+@Table(name = "restaurantes")
 public class Restaurante implements Serializable {
-    
-    @Column(name="descricao")
+
+    @Column(name = "descricao")
     private String descricao;
-    
-    @Column(name="nome_estabelecimento")
+
+    @Column(name = "nome_estabelecimento")
     private String nomeEstabelecimento;
-    
+
     @Id
     @GeneratedValue
-    @Column(name="restaurante_id")
+    @Column(name = "restaurante_id")
     private int restauranteId;
-    
-    @ManyToOne(cascade=CascadeType.ALL, optional=false)
-    @JoinColumn(name="categoria")
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "categoria")
     private Categoria categoria;
-    
-    @Column(name="fotos")
+
+    @Column(name = "fotos")
     private List<String> fotos;
+
+    @Column
+    private int avaliacao;
 
     public Restaurante() {
     }
@@ -42,8 +45,14 @@ public class Restaurante implements Serializable {
         this.categoria = categoria;
         this.fotos = fotos;
     }
-    
-    public void addFotos(String foto){
+
+    public Restaurante(String descricao, String nomeEstabelecimento, Categoria categoria) {
+        this.descricao = descricao;
+        this.nomeEstabelecimento = nomeEstabelecimento;
+        this.categoria = categoria;
+    }
+
+    public void addFotos(String foto) {
         fotos.add(foto);
     }
 
@@ -87,9 +96,17 @@ public class Restaurante implements Serializable {
         this.fotos = fotos;
     }
 
+    public int getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(int avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
     @Override
     public String toString() {
         return "Restaurante{" + "descricao=" + descricao + ", nomeEstabelecimento=" + nomeEstabelecimento + ", restauranteId=" + restauranteId + ", categoria=" + categoria + ", fotos=" + fotos + '}';
     }
-    
+
 }

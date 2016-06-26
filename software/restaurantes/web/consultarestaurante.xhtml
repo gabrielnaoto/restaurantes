@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         Facelets Title
     </h:head>
@@ -13,9 +14,32 @@
                 Consulta de restaurantes
             </ui:define>
             <ui:define name="conteudo">
-                
+                <div id="restaurante-info">
+                    <p:panel id="info" header="#{beanConsultaRestaurante.restaurante.nomeEstabelecimento}" style="margin-bottom:20px">
+                        <p:panelGrid columns="2" styleClass="foo">
+                            <p:galleria value="#{beanConsultaRestaurante.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                                <p:graphicImage name="img/restaurantes/1/#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                            </p:galleria>
+                            <p:panel styleClass="foo2">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="#{beanConsultaRestaurante.restaurante.descricao}"/>
+                                    <p:outputLabel value=""/>
+
+                                    <h:outputText value="Nota:" />
+                                    <p:rating value="#{beanConsultaRestaurante.restaurante.avaliacao}" readonly="true" />    
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:panelGrid>
+                        <f:facet class="footer" name="footer">
+
+                        </f:facet>
+                    </p:panel>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>
 </html>
+
+
+
 
