@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @NamedQuery(name = "Usuario.findByApelido", query = "SELECT u FROM Usuario u WHERE u.apelido = :ap")
 @Entity
@@ -25,6 +26,7 @@ public class Usuario implements Serializable {
     private String apelido;
 
     @Column(name = "data_nascimento")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
 
     @Column(name = "foto")

@@ -14,34 +14,38 @@
                 Consulta de restaurantes
             </ui:define>
             <ui:define name="conteudo">
-                <div id="restaurante-info">
-                    <p:panel id="info" header="#{beanConsultaRestaurante.restaurante.nomeEstabelecimento}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante != null}">
-                        <p:panelGrid columns="2" styleClass="foo">
-                            <p:galleria value="#{beanConsultaRestaurante.images}" var="image" panelWidth="500" panelHeight="313" showCaption="false" >
-                                <p:graphicImage name="img/restaurantes/1/#{image}" alt="Image Description for #{image}" title="#{image}"/>
-                            </p:galleria>
-                            <p:panel styleClass="foo2" >
-                                <h:panelGrid columns="1">
-                                    <p:outputLabel value="#{beanConsultaRestaurante.restaurante.descricao}"/>
-                                </h:panelGrid>
-                                <f:facet name="footer">
-                                    <h:panelGrid columns="2">
-                                        <p:outputLabel value="Avaliação geral:"/>
-                                        <p:rating value="#{beanConsultaRestaurante.restaurante.avaliacao}" readonly="true" />     
+                <h:form>
+                    <div id="restaurante-info">
+                        <p:panel id="info" header="#{beanConsultaRestaurante.restaurante.nomeEstabelecimento}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante != null}">
+                            <p:panelGrid columns="2" styleClass="foo">
+                                <p:galleria value="#{beanConsultaRestaurante.images}" var="image" panelWidth="500" panelHeight="313" showCaption="false" >
+                                    <p:graphicImage name="img/restaurantes/1/#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                                </p:galleria>
+                                <p:panel styleClass="foo2" >
+                                    <h:panelGrid columns="1">
+                                        <p:outputLabel value="#{beanConsultaRestaurante.restaurante.descricao}"/>
                                     </h:panelGrid>
+                                    <f:facet name="footer">
+                                        <h:panelGrid columns="2">
+                                            <p:outputLabel value="Avaliação geral:"/>
+                                            <p:rating value="#{beanConsultaRestaurante.restaurante.avaliacao}" readonly="true" />     
+                                        </h:panelGrid>
 
-                                </f:facet>
-                            </p:panel>
-                        </p:panelGrid>
-                    </p:panel>
-                    <p:panel id="info-not" header="#{i18n.semresultados}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante == null}">
-                        <h:panelGrid columns="1">
-                            <p:outputLabel value="Você pode tentar:"/>
-                            <p:commandLink value="Pesquisar novamente utilizando outros termos" action="index.jsf"/>
-                            <p:commandLink value="Cadastrar um novo restaurante" action="cadastrorestaurante.jsf"/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
+                                    </f:facet>
+                                </p:panel>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:panel id="info-not" header="#{i18n.semresultados}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante == null}">
+
+                            <h:panelGrid columns="1">
+                                <p:outputLabel value="Você pode tentar:"/>
+                                <p:commandLink value="Pesquisar novamente utilizando outros termos" action="index.jsf"/>
+                                <p:commandLink value="Cadastrar um novo restaurante" action="cadastrorestaurante.jsf"/>
+                            </h:panelGrid>
+
+                        </p:panel>
+                    </div>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
