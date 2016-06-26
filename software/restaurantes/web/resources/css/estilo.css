@@ -62,3 +62,8 @@ html, body {
     padding-top: 39px; 
     padding-left: 20px;
 }
+
+#header-login{
+    float: right;
+    margin-top: 39px;
+}

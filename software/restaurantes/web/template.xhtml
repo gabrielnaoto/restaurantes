@@ -21,6 +21,12 @@
                     <p:inputText value="#{beanPesquisa.pesquisa}" size="28"/>
                     <p:commandButton value="#{i18n.pesquisar}" action="#{beanPesquisa.pesquisar()}" ajax="false"/><br/>
                 </div>
+                <div id="header-login">
+                    <p:outputLabel value="Bem vindo, "/>
+                    <p:splitButton value="#{beanLogin.usuario.apelido}" icon="ui-icon-person">
+                        <p:menuitem value="#{i18n.sair}" icon="ui-icon-extlink" />
+                    </p:splitButton>
+                </div>
             </h:form>
         </div>
         <div id="content">
