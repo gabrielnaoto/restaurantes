@@ -35,8 +35,11 @@
                         </p:panelGrid>
                     </p:panel>
                     <p:panel id="info-not" header="#{i18n.semresultados}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante == null}">
-
-
+                        <h:panelGrid columns="1">
+                            <p:outputLabel value="Você pode tentar:"/>
+                            <p:commandLink value="Pesquisar novamente utilizando outros termos" action="index.jsf"/>
+                            <p:commandLink value="Cadastrar um novo restaurante" action="cadastrorestaurante.jsf"/>
+                        </h:panelGrid>
                     </p:panel>
                 </div>
             </ui:define>
