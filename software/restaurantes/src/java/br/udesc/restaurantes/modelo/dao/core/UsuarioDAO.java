@@ -1,26 +1,17 @@
 package br.udesc.restaurantes.modelo.dao.core;
 
-import br.udesc.restaurantes.modelo.dao.jpa.exceptions.NonexistentEntityException;
-import br.udesc.restaurantes.modelo.dao.jpa.exceptions.RollbackFailureException;
 import br.udesc.restaurantes.modelo.entidade.Usuario;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 public interface UsuarioDAO {
 
-    public EntityManager getEntityManager();
+    public void salvar(Usuario usuario);
 
-    public void create(Usuario usuario) throws RollbackFailureException, Exception;
+    public void excluir(Usuario usuario);
 
-    public void edit(Usuario usuario) throws NonexistentEntityException, RollbackFailureException, Exception;
+    public Usuario pesquisar(int id);
 
-    public void destroy(int id) throws NonexistentEntityException, RollbackFailureException, Exception;
-
-    public List<Usuario> findUsuarioEntities();
-
-    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult);
-
-    public Usuario findUsuario(int id);
-
-    public int getUsuarioCount();
+    public List<Usuario> listar();
+    
+    public Usuario apelido(String apelido);
 }

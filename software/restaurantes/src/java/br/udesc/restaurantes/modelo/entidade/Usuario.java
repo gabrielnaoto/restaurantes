@@ -1,6 +1,8 @@
 package br.udesc.restaurantes.modelo.entidade;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,40 +10,42 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@NamedQuery(name = "Usuario.findByApelido", query = "SELECT u FROM Usuario u WHERE u.apelido = :ap")
 @Entity
-@Table(name="usuarios")
-public class Usuario implements Serializable{
-    
-    @Column(name="apelido")
+@Table(name = "usuarios")
+public class Usuario implements Serializable {
+
+    @Column(name = "apelido")
     private String apelido;
-    
-    @Column(name="data_nascimento")
+
+    @Column(name = "data_nascimento")
     private String dataNascimento;
-    
-    @Column(name="foto")
+
+    @Column(name = "foto")
     private String foto;
-    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="gostos")
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "gostos")
     private List<Categoria> gostos;
-    
+
     @Column
     private String nacionalidade;
-    
+
     @Column
     private String nome;
-    
+
     @Column
     private String profissao;
-    
+
     @Id
     @GeneratedValue
-    @Column(name="usuario_id")
+    @Column(name = "usuario_id")
     private int usuarioId;
-    
+
     @Column
     private String senha;
 
@@ -70,10 +74,8 @@ public class Usuario implements Serializable{
         this.usuarioId = usuarioId;
         this.senha = senha;
     }
-    
-    
-    
-    public void addCategoria(String gosto){
+
+    public void addCategoria(String gosto) {
         gostos.add(new Categoria(gosto));
     }
 
@@ -86,7 +88,12 @@ public class Usuario implements Serializable{
     }
 
     public String getDataNascimento() {
-        return dataNascimento;
+        if (dataNascimento != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            return sdf.format(new Date(dataNascimento));
+        } else {
+            return "";
+        }
     }
 
     public void setDataNascimento(String dateNascimento) {
@@ -149,11 +156,9 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
 
-    
     @Override
     public String toString() {
         return "Usuario{" + "apelido=" + apelido + ", dataNascimento=" + dataNascimento + ", foto=" + foto + ", gostos=" + gostos + ", nacionalidade=" + nacionalidade + ", nome=" + nome + ", profissao=" + profissao + ", usuarioId=" + usuarioId + '}';
     }
-    
-    
+
 }
