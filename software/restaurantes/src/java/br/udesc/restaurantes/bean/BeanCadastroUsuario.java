@@ -33,16 +33,7 @@ public class BeanCadastroUsuario {
     }
 
     public String salvar() {       
-        try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("RestaurantePU");
-            EntityManager em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(usuario);
-            em.getTransaction().commit();
-            em.close();
-            emf.close();
-        } catch (Exception ex) {
-        }
+        dao.salvar(usuario);
         return "index";
     }
 

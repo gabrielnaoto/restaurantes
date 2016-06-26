@@ -1,7 +1,7 @@
 package br.udesc.restaurantes.modelo.entidade;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -49,6 +51,13 @@ public class Usuario implements Serializable {
     @Column
     private String senha;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_avaliacao", joinColumns = {
+        @JoinColumn(name = "usuario_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "avaliacao_id")})
+    private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
+
     public Usuario() {
     }
 
@@ -77,6 +86,10 @@ public class Usuario implements Serializable {
 
     public void addCategoria(String gosto) {
         gostos.add(new Categoria(gosto));
+    }
+    
+    public void addAvaliacoes(){
+        avaliacoes.add(new Avaliacao());
     }
 
     public String getApelido() {
@@ -151,9 +164,18 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "apelido=" + apelido + ", dataNascimento=" + dataNascimento + ", foto=" + foto + ", gostos=" + gostos + ", nacionalidade=" + nacionalidade + ", nome=" + nome + ", profissao=" + profissao + ", usuarioId=" + usuarioId + '}';
+        return "Usuario{" + "apelido=" + apelido + ", dataNascimento=" + dataNascimento + ", foto=" + foto + ", gostos=" + gostos + ", nacionalidade=" + nacionalidade + ", nome=" + nome + ", profissao=" + profissao + ", usuarioId=" + usuarioId + ", senha=" + senha + ", avaliacoes=" + avaliacoes + '}';
     }
+
 
 }

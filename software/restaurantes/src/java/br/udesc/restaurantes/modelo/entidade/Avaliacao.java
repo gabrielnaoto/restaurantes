@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,9 +24,8 @@ public class Avaliacao implements Serializable{
     @Column (name="qualicacao")
     private int qualificacao;
     
-    @ManyToOne(cascade=CascadeType.ALL, optional=false)
-    @JoinColumn (name="usuario")
-    private Usuario usuario;
+    @ManyToMany(mappedBy = "avaliacoes")
+    private List<Usuario> usuarios;
     
     @ManyToOne(cascade=CascadeType.ALL, optional=false)
     @JoinColumn (name="restaurante")
@@ -38,11 +38,15 @@ public class Avaliacao implements Serializable{
     public Avaliacao() {
     }
 
-    public Avaliacao(int qualificacao, Usuario usuario, Restaurante restaurante, List<Comentario> comentarios) {
+    public Avaliacao(int qualificacao, List<Usuario> usuarios, Restaurante restaurante, List<Comentario> comentarios) {
         this.qualificacao = qualificacao;
-        this.usuario = usuario;
+        this.usuarios = usuarios;
         this.restaurante = restaurante;
         this.comentarios = comentarios;
+    }
+    
+    public void addUsuario(){
+        usuarios.add(new Usuario());
     }
     
     public void addComentario(String comentario){
@@ -65,12 +69,12 @@ public class Avaliacao implements Serializable{
         this.qualificacao = qualificacao;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public Restaurante getRestaurante() {
@@ -88,10 +92,10 @@ public class Avaliacao implements Serializable{
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
-    
 
     @Override
     public String toString() {
-        return "Avaliacao{" + "avaliacaoId=" + avaliacaoId + ", qualificacao=" + qualificacao + ", usuario=" + usuario + ", restaurante=" + restaurante + ", comentarios=" + comentarios + '}';
+        return "Avaliacao{" + "avaliacaoId=" + avaliacaoId + ", qualificacao=" + qualificacao + ", usuarios=" + usuarios + ", restaurante=" + restaurante + ", comentarios=" + comentarios + '}';
     }
+
 }
