@@ -30,7 +30,7 @@
                         <p:outputLabel for="mask" value="#{i18n.nascimento}" />
                         <p:calendar id="mask" value="#{beanCadastroUsuario.usuario.dataNascimento}" pattern="dd-MM-yyyy" mask="true" />
                         <p:outputLabel value=""/>
-                        
+
                         <p:outputLabel value="#{i18n.profissao}"/>
                         <p:inputText value="#{beanCadastroUsuario.usuario.profissao}" id="in-profissao"
                                      required="true" requiredMessage="#{i18n.obrigatorio}"/>
@@ -48,7 +48,11 @@
                         <p:message for="in-senha"/>
 
                         <p:outputLabel value="#{i18n.foto}"/>
-                        <p:commandButton value ="#{i18n.aqui}" action="#{beanCadastroUsuario.usuario.foto}" id="in-foto"/>
+                        <h:form enctype="multipart/form-data">
+                            <p:fileUpload fileUploadListener="#{beanCadastroUsuario.upload}" mode="advanced"
+                                          update="messages" auto="true" allowTypes="/(\.|\/)(gif|jp?g|png)$/" />
+                            <p:growl id="messages" showDetail="true" />
+                        </h:form>
                         <p:outputLabel value=""/>
                         <p:commandButton value="#{i18n.finalizar}" action="#{beanCadastroUsuario.apelido}" ajax="false" update="growl"/>
                     </h:panelGrid>
