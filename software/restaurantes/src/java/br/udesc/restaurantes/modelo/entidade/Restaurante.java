@@ -113,6 +113,16 @@ public class Restaurante implements Serializable {
         this.avaliacao = avaliacao;
     }
 
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Restaurante{" + "descricao=" + descricao + ", nomeEstabelecimento=" + nomeEstabelecimento + ", restauranteId=" + restauranteId + ", categoria=" + categoria + ", fotos=" + fotos + '}';
