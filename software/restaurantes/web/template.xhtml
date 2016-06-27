@@ -32,10 +32,10 @@
 
                     <p:dialog header="Login" widgetVar="dlg" resizable="false">
                         <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputLabel for="username" value="Username:" />
+                            <h:outputLabel for="username" value="#{i18n.usuario}" />
                             <p:inputText id="username" value="#{beanLogin.username}" required="false" label="username" />
 
-                            <h:outputLabel for="password" value="Password:" />
+                            <h:outputLabel for="password" value="#{i18n.senha}" />
                             <p:password id="password" value="#{beanLogin.password}" required="false" label="password" />
 
                             <f:facet name="footer">

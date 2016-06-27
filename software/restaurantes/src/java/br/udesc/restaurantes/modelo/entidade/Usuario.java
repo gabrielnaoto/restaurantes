@@ -12,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
-@NamedQuery(name = "Usuario.findByApelido", query = "SELECT u FROM Usuario u WHERE u.apelido = :ap")
+@NamedQueries({
+@NamedQuery(name = "Usuario.findByApelido", query = "SELECT u FROM Usuario u WHERE u.apelido = :ap"),
+@NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
 @Entity
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
@@ -89,8 +92,8 @@ public class Usuario implements Serializable {
     public void addCategoria(String gosto) {
         gostos.add(new Categoria(gosto));
     }
-    
-    public void addAvaliacoes(){
+
+    public void addAvaliacoes() {
         avaliacoes.add(new Avaliacao());
     }
 
@@ -178,6 +181,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario{" + "apelido=" + apelido + ", dataNascimento=" + dataNascimento + ", foto=" + foto + ", gostos=" + gostos + ", nacionalidade=" + nacionalidade + ", nome=" + nome + ", profissao=" + profissao + ", usuarioId=" + usuarioId + ", senha=" + senha + ", avaliacoes=" + avaliacoes + '}';
     }
-
 
 }

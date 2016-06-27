@@ -5,14 +5,14 @@
  */
 package br.udesc.restaurantes.bean;
 
+import br.udesc.restaurantes.modelo.dao.core.JPAFactory;
+import br.udesc.restaurantes.modelo.dao.core.UsuarioDAO;
 import br.udesc.restaurantes.modelo.dao.core.util.SessionUtils;
 import br.udesc.restaurantes.modelo.entidade.Usuario;
-import java.awt.event.ActionEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @ViewScoped
@@ -21,28 +21,30 @@ public class BeanLogin {
     private Usuario usuario;
     private String username;
     private String password;
+    private UsuarioDAO dao;
 
-    public void login() {
-        boolean loggedIn = false;         
-        if (username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")){
-                    usuario = new Usuario("Marcelo", null, null, null, null, null, null, 0);
-                    SessionUtils.setParam("user", usuario);
-                    loggedIn = true;
-        } else {
-            loggedIn = false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Apelido já existe"));
-        }                
-    }
-    
-    public String logout(){
-        SessionUtils.invalidate();
-        return "index.jsf";
-    }
-    
     public BeanLogin() {
+        dao = JPAFactory.getUsuarioDAO();
         usuario = (Usuario) SessionUtils.getParam("user");
         username = "";
         password = "";
+    }
+    
+    public void login() {
+        boolean loggedIn = false;
+        usuario = dao.autenticar(username, password);
+        if (usuario != null){
+            SessionUtils.setParam("user", usuario);
+            loggedIn = true;
+        } else{
+            loggedIn = false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário nao cadastrado"));
+        }
+    }   
+
+    public String logout() {
+        SessionUtils.invalidate();
+        return "index.jsf";
     }
 
     public Usuario getUsuario() {
@@ -68,6 +70,5 @@ public class BeanLogin {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
 }
