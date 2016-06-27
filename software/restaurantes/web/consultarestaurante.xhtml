@@ -35,14 +35,33 @@
                                 </p:panel>
                             </p:panelGrid>
                         </p:panel>
+                        <p:panel id="info-comments" header="#{i18n.avaliacoes}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante != null}">
+                            <p:dataScroller value="#{beanConsultaRestaurante.restaurante.avaliacoes}" var="ava" chunkSize="10">
+                                <f:facet name="loader">
+                                    <p:commandButton type="button" value="Mais comentários" icon="ui-icon-circle-triangle-s"/>
+                                </f:facet>
+                                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <p:outputLabel value="#{ava.usuario.apelido}"/>
+                                            <p:rating value="#{ava.qualificacao}" readonly="true"/>
+                                            <p:dataList value="#{ava.comentarios}" var="c" type="ordered">
+                                                <f:facet name="header">
+                                                    #{i18n.comentarios}
+                                                </f:facet>
+                                                #{c.comentario}
+                                            </p:dataList>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                </h:panelGrid>
+                            </p:dataScroller>
+                        </p:panel>
                         <p:panel id="info-not" header="#{i18n.semresultados}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante == null}">
-
                             <h:panelGrid columns="1">
                                 <p:outputLabel value="Você pode tentar:"/>
                                 <p:commandLink value="Pesquisar novamente utilizando outros termos" action="index.jsf"/>
                                 <p:commandLink value="Cadastrar um novo restaurante" action="cadastrorestaurante.jsf"/>
                             </h:panelGrid>
-
                         </p:panel>
                     </div>
                 </h:form>
