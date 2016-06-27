@@ -90,7 +90,7 @@ public class JPAUsuarioDAO implements Serializable, UsuarioDAO {
             query.setParameter("ap", apelido);
             u = query.getSingleResult();
             TypedQuery<Usuario> query2 = em.createNamedQuery("Usuario.findBySenha", Usuario.class);
-            query.setParameter("senha", senha);
+            query2.setParameter("senha", senha);
             u = query.getSingleResult();
         } catch (Exception e) { 
         } finally {

@@ -9,6 +9,18 @@
         Facelets Title
     </h:head>
     <h:body>
+        <filter>
+            <filter-name>PrimeFaces FileUpload Filter</filter-name>
+            <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        </filter>
+        <filter-mapping>
+            <filter-name>PrimeFaces FileUpload Filter</filter-name>
+            <servlet-name>Faces Servlet</servlet-name>
+        </filter-mapping>
+        <context-param>
+            <param-name>primefaces.UPLOADER</param-name>
+            <param-value>commons</param-value>
+        </context-param>
         <ui:composition template="template.xhtml">
             <ui:define name="titulo">
                 Cadastro de usuários
@@ -48,12 +60,13 @@
                         <p:message for="in-senha"/>
 
                         <p:outputLabel value="#{i18n.foto}"/>
+                        <p:growl id="mensagens" autoUpdate="true"/>
                         <h:form enctype="multipart/form-data">
                             <p:fileUpload fileUploadListener="#{beanCadastroUsuario.upload}" mode="advanced"
-                                          update="messages" auto="true" allowTypes="/(\.|\/)(gif|jp?g|png)$/" />
+                                          update="messages" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+<!--                                          value="#{beanCadastroUsuario.file}"/>-->
                             <p:growl id="messages" showDetail="true" />
                         </h:form>
-                        <p:outputLabel value=""/>
                         <p:commandButton value="#{i18n.finalizar}" action="#{beanCadastroUsuario.apelido}" ajax="false" update="growl"/>
                     </h:panelGrid>
                 </h:form>

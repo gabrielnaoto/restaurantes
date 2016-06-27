@@ -7,7 +7,7 @@ package br.udesc.restaurantes.bean;
 
 import br.udesc.restaurantes.modelo.dao.core.JPAFactory;
 import br.udesc.restaurantes.modelo.dao.core.UsuarioDAO;
-import br.udesc.restaurantes.modelo.dao.core.util.SessionUtils;
+import br.udesc.restaurantes.modelo.dao.core.util.SessionUtil;
 import br.udesc.restaurantes.modelo.entidade.Usuario;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -25,7 +25,7 @@ public class BeanLogin {
 
     public BeanLogin() {
         dao = JPAFactory.getUsuarioDAO();
-        usuario = (Usuario) SessionUtils.getParam("user");
+        usuario = (Usuario) SessionUtil.getParam("user");
         username = "";
         password = "";
     }
@@ -34,7 +34,7 @@ public class BeanLogin {
         boolean loggedIn = false;
         usuario = dao.autenticar(username, password);
         if (usuario != null){
-            SessionUtils.setParam("user", usuario);
+            SessionUtil.setParam("user", usuario);
             loggedIn = true;
         } else{
             loggedIn = false;
@@ -43,7 +43,7 @@ public class BeanLogin {
     }   
 
     public String logout() {
-        SessionUtils.invalidate();
+        SessionUtil.invalidate();
         return "index.jsf";
     }
 

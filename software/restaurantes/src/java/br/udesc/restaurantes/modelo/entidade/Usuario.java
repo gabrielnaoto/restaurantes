@@ -61,18 +61,7 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String apelido, Date dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, int usuarioId) {
-        this.apelido = apelido;
-        this.dataNascimento = dataNascimento;
-        this.foto = foto;
-        this.gostos = gostos;
-        this.nacionalidade = nacionalidade;
-        this.nome = nome;
-        this.profissao = profissao;
-        this.usuarioId = usuarioId;
-    }
-
-    public Usuario(String apelido, Date dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, int usuarioId, String senha) {
+    public Usuario(String apelido, Date dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, int usuarioId, String senha, List<Avaliacao> avaliacoes) {
         this.apelido = apelido;
         this.dataNascimento = dataNascimento;
         this.foto = foto;
@@ -82,7 +71,21 @@ public class Usuario implements Serializable {
         this.profissao = profissao;
         this.usuarioId = usuarioId;
         this.senha = senha;
+        this.avaliacoes = avaliacoes;
     }
+
+    public Usuario(String apelido, Date dataNascimento, String foto, List<Categoria> gostos, String nacionalidade, String nome, String profissao, String senha, List<Avaliacao> avaliacoes) {
+        this.apelido = apelido;
+        this.dataNascimento = dataNascimento;
+        this.foto = foto;
+        this.gostos = gostos;
+        this.nacionalidade = nacionalidade;
+        this.nome = nome;
+        this.profissao = profissao;
+        this.senha = senha;
+        this.avaliacoes = avaliacoes;
+    }
+    
 
     public void addCategoria(String gosto) {
         gostos.add(new Categoria(gosto));
