@@ -24,8 +24,9 @@ public class Avaliacao implements Serializable{
     @Column (name="qualicacao")
     private int qualificacao;
     
-    @ManyToMany(mappedBy = "avaliacoes")
-    private List<Usuario> usuarios;
+    @ManyToOne(cascade=CascadeType.ALL, optional=false)
+    @JoinColumn (name="usuario")
+    private Usuario usuario;
     
     @ManyToOne(cascade=CascadeType.ALL, optional=false)
     @JoinColumn (name="restaurante")
@@ -38,15 +39,11 @@ public class Avaliacao implements Serializable{
     public Avaliacao() {
     }
 
-    public Avaliacao(int qualificacao, List<Usuario> usuarios, Restaurante restaurante, List<Comentario> comentarios) {
+    public Avaliacao(int qualificacao, Usuario usuario, Restaurante restaurante, List<Comentario> comentarios) {
         this.qualificacao = qualificacao;
-        this.usuarios = usuarios;
+        this.usuario = usuario;
         this.restaurante = restaurante;
         this.comentarios = comentarios;
-    }
-    
-    public void addUsuario(){
-        usuarios.add(new Usuario());
     }
     
     public void addComentario(String comentario){
@@ -69,12 +66,12 @@ public class Avaliacao implements Serializable{
         this.qualificacao = qualificacao;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Restaurante getRestaurante() {
@@ -93,9 +90,5 @@ public class Avaliacao implements Serializable{
         this.comentarios = comentarios;
     }
 
-    @Override
-    public String toString() {
-        return "Avaliacao{" + "avaliacaoId=" + avaliacaoId + ", qualificacao=" + qualificacao + ", usuarios=" + usuarios + ", restaurante=" + restaurante + ", comentarios=" + comentarios + '}';
-    }
 
 }

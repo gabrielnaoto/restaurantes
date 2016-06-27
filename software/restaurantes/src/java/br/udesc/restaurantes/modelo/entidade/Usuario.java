@@ -10,8 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,13 +38,13 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "gostos")
     private List<Categoria> gostos;
 
-    @Column
+    @Column(name = "nacionalidade")
     private String nacionalidade;
 
-    @Column
+    @Column(name = "nome")
     private String nome;
 
-    @Column
+    @Column(name = "profissao")
     private String profissao;
 
     @Id
@@ -53,15 +52,11 @@ public class Usuario implements Serializable {
     @Column(name = "usuario_id")
     private int usuarioId;
 
-    @Column
+    @Column(name = "senha")
     private String senha;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_avaliacao", joinColumns = {
-        @JoinColumn(name = "usuario_id")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "avaliacao_id")})
-    private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Avaliacao> avaliacoes;
 
     public Usuario() {
     }
@@ -93,8 +88,8 @@ public class Usuario implements Serializable {
         gostos.add(new Categoria(gosto));
     }
 
-    public void addAvaliacoes() {
-        avaliacoes.add(new Avaliacao());
+    public void addAvaliacoes(Avaliacao a) {
+        avaliacoes.add(a);
     }
 
     public String getApelido() {

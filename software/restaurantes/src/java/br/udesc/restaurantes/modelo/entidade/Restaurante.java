@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,11 +30,15 @@ public class Restaurante implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "categoria")
     private Categoria categoria;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avaliacoes")
+    private List<Avaliacao> avaliacoes;
 
     @Column(name = "fotos")
     private List<String> fotos;
 
-    @Column
+    @Column(name = "avaliacao")
     private int avaliacao;
 
     public Restaurante() {
@@ -54,6 +59,10 @@ public class Restaurante implements Serializable {
 
     public void addFotos(String foto) {
         fotos.add(foto);
+    }
+    
+    public void addAvaliacao (Avaliacao a){
+        avaliacoes.add(a);
     }
 
     public String getDescricao() {
