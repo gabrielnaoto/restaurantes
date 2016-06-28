@@ -52,6 +52,11 @@
                         <p:inputText value="#{beanCadastroUsuario.usuario.nacionalidade}" id="in-nacionalidade"
                                      required="true" requiredMessage="#{i18n.obrigatorio}"/>
                         <p:message for="in-nacionalidade"/>
+                        
+                        <p:outputLabel value="#{i18n.gostos}"/>
+                        <p:inputTextarea value="#{beanCadastroUsuario.usuario.gostos}" id="in-gostos"
+                                     required="true" requiredMessage="#{i18n.gostos}"/>
+                        <p:message for="in-gostos"/>
 
                         <p:outputLabel value="#{i18n.senha}"/>
                         <p:password value="#{beanCadastroUsuario.usuario.senha}" id="in-senha" validatorMessage="#{i18n.tamanho}">

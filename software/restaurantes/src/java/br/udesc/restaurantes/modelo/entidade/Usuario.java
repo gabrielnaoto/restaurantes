@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -18,7 +17,7 @@ import javax.persistence.Temporal;
 
 @NamedQueries({
     @NamedQuery(name = "Usuario.findByApelido", query = "SELECT u FROM Usuario u WHERE u.apelido = :ap"),
-    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
+    @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.senha = :senha and u.apelido =:ap")})
 @Entity
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
@@ -32,11 +31,10 @@ public class Usuario implements Serializable {
 
     @Column(name = "foto")
     private String foto;
+    
+    @Column(name = "gostos")
+    private String gostos;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "categoria_id")
-//    private List<Categoria> gostos;
-//    
     @Column(name = "nacionalidade")
     private String nacionalidade;
 
@@ -73,10 +71,11 @@ public class Usuario implements Serializable {
         this.avaliacoes = avaliacoes;
     }
 
-    public Usuario(String apelido, Date dataNascimento, String foto, String nacionalidade, String nome, String profissao, String senha, List<Avaliacao> avaliacoes) {
+    public Usuario(String apelido, Date dataNascimento, String foto, String gostos, String nacionalidade, String nome, String profissao, String senha, List<Avaliacao> avaliacoes) {
         this.apelido = apelido;
         this.dataNascimento = dataNascimento;
         this.foto = foto;
+        this.gostos = gostos;
         this.nacionalidade = nacionalidade;
         this.nome = nome;
         this.profissao = profissao;
@@ -84,9 +83,6 @@ public class Usuario implements Serializable {
         this.avaliacoes = avaliacoes;
     }
 
-//    public void addCategoria(String gosto) {
-//        gostos.add(new Categoria(gosto));
-//    }
     public void addAvaliacoes(Avaliacao a) {
         avaliacoes.add(a);
     }
@@ -115,13 +111,14 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
-//    public List<Categoria> getGostos() {
-//        return gostos;
-//    }
-//
-//    public void setGostos(List<Categoria> gostos) {
-//        this.gostos = gostos;
-//    }
+    public String getGostos() {
+        return gostos;
+    }
+
+    public void setGostos(String gostos) {
+        this.gostos = gostos;
+    }
+
     public String getNacionalidade() {
         return nacionalidade;
     }

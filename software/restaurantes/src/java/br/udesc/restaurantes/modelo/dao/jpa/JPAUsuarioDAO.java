@@ -86,11 +86,9 @@ public class JPAUsuarioDAO implements Serializable, UsuarioDAO {
         EntityManager em = null;
         try {
             em = getEntityManager();
-            TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findByApelido", Usuario.class);
+            TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findByLogin", Usuario.class);
             query.setParameter("ap", apelido);
-            u = query.getSingleResult();
-            TypedQuery<Usuario> query2 = em.createNamedQuery("Usuario.findBySenha", Usuario.class);
-            query2.setParameter("senha", senha);
+            query.setParameter("senha", senha);
             u = query.getSingleResult();
         } catch (Exception e) { 
         } finally {
