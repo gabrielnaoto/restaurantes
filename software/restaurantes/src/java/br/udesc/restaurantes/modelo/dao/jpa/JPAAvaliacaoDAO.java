@@ -2,12 +2,14 @@ package br.udesc.restaurantes.modelo.dao.jpa;
 
 import br.udesc.restaurantes.modelo.dao.core.AvaliacaoDAO;
 import br.udesc.restaurantes.modelo.entidade.Avaliacao;
+import br.udesc.restaurantes.modelo.entidade.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 public class JPAAvaliacaoDAO implements Serializable, AvaliacaoDAO {
 
@@ -75,4 +77,20 @@ public class JPAAvaliacaoDAO implements Serializable, AvaliacaoDAO {
         }
     }
     
+    @Override
+    public void atualizar(Avaliacao avaliacao) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.merge(avaliacao);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
+
 }

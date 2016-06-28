@@ -35,11 +35,11 @@
                     <p:outputLabel value="#{i18n.fotos}"/>
                         <h:form enctype="multipart/form-data">
                             <p:fileUpload fileUploadListener="#{beanCadastroRestaurante.upload}" mode="advanced"
-                                          update="messages" auto="true" allowTypes="/(\.|\/)(gif|jp?g|png)$/" />
+                                          update="messages" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                             <p:growl id="messages" showDetail="true" />
                         </h:form>
                     <p:outputLabel value=""/>
-                    <p:commandButton value="#{i18n.finalizar}" action="#{beanCadastroRestaurante.salvar}" ajax="false"/>
+                    <p:commandButton value="#{i18n.finalizar}" action="#{beanCadastroRestaurante.validaNome}" ajax="false"/>
                 </h:panelGrid>
                 </h:form>
             </ui:define>

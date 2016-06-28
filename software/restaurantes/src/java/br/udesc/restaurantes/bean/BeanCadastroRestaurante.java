@@ -39,6 +39,16 @@ public class BeanCadastroRestaurante {
         return "index";
     }
     
+    public String validaNome() {
+        if (dao.validaNome(restaurante.getNomeEstabelecimento()) == null){
+            return salvar();
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Restaurante já existe"));
+            return null;
+        }
+    }
+    
     public Restaurante getRestaurante() {
         return restaurante;
     }
@@ -104,7 +114,4 @@ public class BeanCadastroRestaurante {
         this.select = select;
     }
 
-    
-    
-    
 }
