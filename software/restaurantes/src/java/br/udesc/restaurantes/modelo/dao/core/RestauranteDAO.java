@@ -8,10 +8,14 @@ public interface RestauranteDAO {
     public void salvar(Restaurante restaurante);
 
     public void excluir(Restaurante restaurante);
-    
+
     public Restaurante pesquisar(int id);
-    
+
     public List<Restaurante> listar();
 
     public Restaurante consultar(String r);
+
+    public Restaurante validaNome(String rest);
+    
+    public void atualizar(Restaurante r);
 }

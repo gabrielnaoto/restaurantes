@@ -22,12 +22,12 @@ public class Avaliacao implements Serializable{
     @Column (name="qualificacao")
     private int qualificacao;
     
-    @ManyToOne(cascade=CascadeType.ALL, optional=false)
-    @JoinColumn (name="usuario_id")
+    @ManyToOne(cascade=CascadeType.DETACH)
+    @JoinColumn(name="usuario_id")
     private Usuario usuario;
     
-    @ManyToOne(cascade=CascadeType.ALL, optional=false)
-    @JoinColumn (name="restaurante_id")
+    @ManyToOne(cascade=CascadeType.DETACH)
+    @JoinColumn(name="restaurante_id")
     private Restaurante restaurante;
     
     @OneToOne(cascade=CascadeType.ALL)

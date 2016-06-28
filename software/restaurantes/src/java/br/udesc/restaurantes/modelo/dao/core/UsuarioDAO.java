@@ -12,9 +12,11 @@ public interface UsuarioDAO {
     public Usuario pesquisar(int id);
 
     public List<Usuario> listar();
-    
+
     public Usuario autenticar(String apelido, String senha);
-    
+
     public Usuario apelido(String apelido);
-    
+
+    public void atualizar(Usuario u);
+
 }

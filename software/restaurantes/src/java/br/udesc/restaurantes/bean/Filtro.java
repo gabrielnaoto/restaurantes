@@ -38,23 +38,6 @@ public class Filtro implements Filter {
                 chain.doFilter(request, response);
             }
         }
-
-//        if ((session.getAttribute("usuario") != null)
-//                || (requisicao.getRequestURI().endsWith("index.jsf"))
-//                || (requisicao.getRequestURI().endsWith("consultarestaurante.jsf"))
-//                || (requisicao.getRequestURI().endsWith("cadastrousuario.jsf"))
-//                || (requisicao.getRequestURI().contains("javax.faces.resource/"))) {
-//            chain.doFilter(request, response);
-//        } else {
-//            if (session.getAttribute("usuario") == null){
-//                if((requisicao.getRequestURI().contains("cadastrorestaurante.jsf"))){
-//                    redireciona("index.jsf", response);
-//                }
-//                else{
-//                    chain.doFilter(request, response);
-//                }
-//            }
-//        }
     }
 
     private void redireciona(String url, ServletResponse response) throws IOException {

@@ -52,8 +52,7 @@ public class Usuario implements Serializable {
     @Column(name = "senha")
     private String senha;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "avaliacao_id")
+    @OneToMany(mappedBy = "usuario")
     private List<Avaliacao> avaliacoes;
 
     public Usuario() {

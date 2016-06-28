@@ -1,6 +1,7 @@
 package br.udesc.restaurantes.modelo.dao.core;
 
 import br.udesc.restaurantes.modelo.entidade.Avaliacao;
+import br.udesc.restaurantes.modelo.entidade.Usuario;
 import java.util.List;
 
 public interface AvaliacaoDAO {
@@ -13,4 +14,5 @@ public interface AvaliacaoDAO {
 
     public List<Avaliacao> listar();
 
+    public void atualizar(Avaliacao avaliacao);
 }

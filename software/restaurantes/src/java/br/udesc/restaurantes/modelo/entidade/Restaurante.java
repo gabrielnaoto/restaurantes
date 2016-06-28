@@ -9,11 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "restaurantes")
+@NamedQuery(name = "Restaurante.findByNome", query = "SELECT r FROM Restaurante r WHERE r.nomeEstabelecimento = :re")
 public class Restaurante implements Serializable {
 
     @Column(name = "descricao")
@@ -31,14 +33,14 @@ public class Restaurante implements Serializable {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "avaliacao_id")
+    @OneToMany(mappedBy = "restaurante")
     private List<Avaliacao> avaliacoes;
 
     @Column(name = "fotos")
     private List<String> fotos;
 
-    @Column(name = "avaliacao")
+    //@Transient
+    @Column(name="avaliacao")
     private int avaliacao;
 
     public Restaurante() {
@@ -119,13 +121,6 @@ public class Restaurante implements Serializable {
 
     public void setAvaliacoes(List<Avaliacao> avaliacoes) {
         this.avaliacoes = avaliacoes;
-    }
-
-    
-    
-    @Override
-    public String toString() {
-        return "Restaurante{" + "descricao=" + descricao + ", nomeEstabelecimento=" + nomeEstabelecimento + ", restauranteId=" + restauranteId + ", categoria=" + categoria + ", fotos=" + fotos + '}';
     }
 
 }
