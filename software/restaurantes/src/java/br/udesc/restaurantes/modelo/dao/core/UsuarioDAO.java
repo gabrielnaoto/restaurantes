@@ -16,4 +16,5 @@ public interface UsuarioDAO {
     public Usuario autenticar(String apelido, String senha);
     
     public Usuario apelido(String apelido);
+    
 }

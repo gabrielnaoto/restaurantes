@@ -10,8 +10,12 @@ import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import org.primefaces.event.FileUploadEvent;
+
 import org.primefaces.model.UploadedFile;
 
 @ManagedBean
@@ -21,12 +25,13 @@ public class BeanCadastroUsuario {
     private Usuario usuario;
     private UsuarioDAO dao;
     private UploadedFile file;
+
     public BeanCadastroUsuario() {
         usuario = new Usuario();
         dao = JPAFactory.getUsuarioDAO();
     }
 
-    public String salvar() {       
+    public String salvar() {
         dao.salvar(usuario);
         return "index";
     }
@@ -64,26 +69,54 @@ public class BeanCadastroUsuario {
         this.file = file;
     }
 
+    public void criaArquivo(byte[] bytes, String arquivo) {
+        File f = new File(arquivo);
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(f);
+            fos.write(bytes);
+            fos.flush();
+            fos.close();
+            System.out.println(f.getAbsolutePath() + "-tagggparapesquisar");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Succesful", arquivo + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (FileNotFoundException ex) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro", "file not found");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (IOException ex) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro", "io exception");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
     public void upload(FileUploadEvent event) {
-        file = event.getFile();
+        try {
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
 
-        if (file != null) {
-            File file1 = new File("recources/img/usuario", file.getFileName()); 
-            try {
-                FileOutputStream fos = new FileOutputStream(file1);
-                fos.write(event.getFile().getContents());
-                fos.close();
-                fos.flush();
+            FacesContext aFacesContext = FacesContext.getCurrentInstance();
+            ServletContext context = (ServletContext) aFacesContext.getExternalContext().getContext();
 
-                FacesContext instance = FacesContext.getCurrentInstance();
-                instance.addMessage("mensagens", new FacesMessage(
-                        FacesMessage.SEVERITY_ERROR,
-                        file.getFileName() + " anexado com sucesso", null));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } 
+            String realPath = context.getRealPath("../../");
+
+            File file = new File(realPath + "\\web\\resources\\img\\usuarios\\");
+            file.mkdirs();
+            String caminhoServer = context.getRealPath("");
+            byte[] arquivo = event.getFile().getContents();
+            String caminho = realPath + "\\web\\resources\\img\\usuarios\\" + event.getFile().getFileName();
+
+            FileOutputStream fos = new FileOutputStream(caminho);
+            fos.write(arquivo);
+            fos.close();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "Foto inserida!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro", "Erro ao cadastrar.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 }

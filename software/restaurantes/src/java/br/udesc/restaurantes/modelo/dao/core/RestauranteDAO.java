@@ -13,4 +13,5 @@ public interface RestauranteDAO {
     
     public List<Restaurante> listar();
 
+    public Restaurante consultar(String r);
 }
