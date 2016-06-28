@@ -15,7 +15,7 @@ public class Comentario implements Serializable{
     private String comentario;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue    
     @Column(name="comentario_id")
     private int comentarioId;
 

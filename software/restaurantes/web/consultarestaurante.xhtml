@@ -45,22 +45,16 @@
                                         <h:panelGrid columns="2" cellpadding="5">
                                             <p:outputLabel value="#{ava.usuario.apelido}"/>
                                             <p:rating value="#{ava.qualificacao}" readonly="true"/>
-                                            <p:dataList value="#{ava.comentarios}" var="c" type="ordered">
-                                                <f:facet name="header">
-                                                    #{i18n.comentarios}
-                                                </f:facet>
-                                                #{c.comentario}
-                                            </p:dataList>
+                                            <p:outputLabel value="#{ava.comentario}"/>
                                         </h:panelGrid>
                                     </p:outputPanel>
                                 </h:panelGrid>
                             </p:dataScroller>
                         </p:panel>
                         <p:panel id="info-not" header="#{i18n.semresultados}" style="margin-bottom:20px" rendered="#{beanConsultaRestaurante.restaurante == null}">
-                            <h:panelGrid columns="1">
-                                <p:outputLabel value="Você pode tentar:"/>
-                                <p:commandLink value="Pesquisar novamente utilizando outros termos" action="index.jsf"/>
-                                <p:commandLink value="Cadastrar um novo restaurante" action="cadastrorestaurante.jsf"/>
+                            <h:panelGrid>
+                                <p:outputLabel value="#{i18n.tentar}"/> <p:commandLink value="#{i18n.pesquisarNovamente}" action="index.jsf"/>
+                                <p:link value="#{i18n.cadastrarRestaurante}" outcome="cadastrorestaurante.jsf"/>
                             </h:panelGrid>
                         </p:panel>
                     </div>

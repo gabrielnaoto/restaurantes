@@ -11,11 +11,12 @@ import br.udesc.restaurantes.modelo.dao.core.util.SessionUtil;
 import br.udesc.restaurantes.modelo.entidade.Usuario;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class BeanLogin {
 
     private Usuario usuario;
@@ -25,22 +26,25 @@ public class BeanLogin {
 
     public BeanLogin() {
         dao = JPAFactory.getUsuarioDAO();
+        if (SessionUtil.getParam("user") == null) {
+            System.out.println("é nulo --tagpesquisarrr");
+        }
         usuario = (Usuario) SessionUtil.getParam("user");
         username = "";
         password = "";
     }
-    
+
     public void login() {
         boolean loggedIn = false;
         usuario = dao.autenticar(username, password);
-        if (usuario != null){
+        if (usuario != null) {
             SessionUtil.setParam("user", usuario);
             loggedIn = true;
-        } else{
+        } else {
             loggedIn = false;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário nao cadastrado"));
         }
-    }   
+    }
 
     public String logout() {
         SessionUtil.invalidate();

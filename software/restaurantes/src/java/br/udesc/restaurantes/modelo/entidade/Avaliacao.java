@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,29 +19,29 @@ public class Avaliacao implements Serializable{
     @Column(name="avaliacao_id")
     private int avaliacaoId;
     
-    @Column (name="qualicacao")
+    @Column (name="qualificacao")
     private int qualificacao;
     
     @ManyToOne(cascade=CascadeType.ALL, optional=false)
-    @JoinColumn (name="usuario")
+    @JoinColumn (name="usuario_id")
     private Usuario usuario;
     
     @ManyToOne(cascade=CascadeType.ALL, optional=false)
-    @JoinColumn (name="restaurante")
+    @JoinColumn (name="restaurante_id")
     private Restaurante restaurante;
     
-    @ManyToOne(cascade=CascadeType.ALL, optional=false)
-    @JoinColumn (name="comentarios")
-    private Comentario comentarios;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn (name="comentario_id")
+    private Comentario comentario;
 
     public Avaliacao() {
     }
 
-    public Avaliacao(int qualificacao, Usuario usuario, Restaurante restaurante, Comentario comentarios) {
+    public Avaliacao(int qualificacao, Usuario usuario, Restaurante restaurante, Comentario comentario) {
         this.qualificacao = qualificacao;
         this.usuario = usuario;
         this.restaurante = restaurante;
-        this.comentarios = comentarios;
+        this.comentario = comentario;
     }
 
     public int getAvaliacaoId() {
@@ -75,12 +76,12 @@ public class Avaliacao implements Serializable{
         this.restaurante = restaurante;
     }
 
-    public Comentario getComentarios() {
-        return comentarios;
+    public Comentario getComentario() {
+        return comentario;
     }
 
-    public void setComentarios(Comentario comentarios) {
-        this.comentarios = comentarios;
+    public void setComentario(Comentario comentario) {
+        this.comentario = comentario;
     }
 
    

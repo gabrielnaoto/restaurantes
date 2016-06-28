@@ -28,11 +28,11 @@ public class Restaurante implements Serializable {
     private int restauranteId;
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "categoria")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "avaliacoes")
+    @JoinColumn(name = "avaliacao_id")
     private List<Avaliacao> avaliacoes;
 
     @Column(name = "fotos")

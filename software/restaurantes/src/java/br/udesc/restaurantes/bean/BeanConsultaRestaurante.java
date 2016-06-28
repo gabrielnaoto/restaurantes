@@ -14,11 +14,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-/**
- *
- * @author ignoi
- */
 @ManagedBean
 @ViewScoped
 public class BeanConsultaRestaurante {
@@ -43,12 +43,22 @@ public class BeanConsultaRestaurante {
         FacesContext ctx = FacesContext.getCurrentInstance();
         Map sessionMap = ctx.getExternalContext().getSessionMap();
         BeanPesquisa mbean = (BeanPesquisa) sessionMap.get("beanPesquisa");
-        if (mbean.getPesquisa().equalsIgnoreCase("madalosso")) {
-            restaurante = new Restaurante("Desde 1963 o Madalosso constrói sua história como um restaurante familiar, que encontrou na tradição italiana um estilo único de servir e degustar. O restaurante mantém até hoje suas origens, cuidando de cada cliente como um convidado, um velho amigo da casa. Conheça nossa trajetória.", "Madalosso", new Categoria("Italiano"));
-            restaurante.setAvaliacao(4);
-        } else {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("RestaurantePU");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+        Query query = em.createQuery("select r from Restaurante r where r.nomeEstabelecimento = :nome");
+        query.setParameter("nome", mbean.getPesquisa());
+        try {
+            restaurante = (Restaurante) query.getSingleResult();
+        } catch (Exception e) {
             restaurante = null;
         }
+        em.close();
+        emf.close();
+        mbean.setPesquisa("");
+
     }
 
     public Restaurante getRestaurante() {
