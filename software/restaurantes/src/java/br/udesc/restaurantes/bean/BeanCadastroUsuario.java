@@ -106,11 +106,14 @@ public class BeanCadastroUsuario {
             file.mkdirs();
             String caminhoServer = context.getRealPath("");
             byte[] arquivo = event.getFile().getContents();
-            String caminho = realPath + "\\web\\resources\\img\\usuarios\\" + event.getFile().getFileName();
+            String nomesss = Integer.toString((int)Math.ceil(Math.random() * 1000)) + Integer.toString((int)Math.ceil(Math.random() * 1000)) + Integer.toString((int)Math.ceil(Math.random() * 1000)) + Integer.toString((int)Math.ceil(Math.random() * 1000));
+            String[] type = event.getFile().getContentType().split("/");
+            String caminho = realPath + "\\web\\resources\\img\\usuarios\\" + nomesss + "." + type[1];
 
             FileOutputStream fos = new FileOutputStream(caminho);
             fos.write(arquivo);
             fos.close();
+            usuario.setFoto("\\web\\resources\\img\\usuarios\\" + nomesss + "." + type[1]);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "Foto inserida!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } catch (Exception e) {

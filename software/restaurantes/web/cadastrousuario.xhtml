@@ -65,7 +65,7 @@
                         <p:message for="in-senha"/>
 
                         <p:outputLabel value="#{i18n.foto}"/>
-                        <p:growl id="mensagens" autoUpdate="true"/>
+  
                         <h:form enctype="multipart/form-data">
                             <p:fileUpload fileUploadListener="#{beanCadastroUsuario.upload}" mode="advanced"
                                           update="messages" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
